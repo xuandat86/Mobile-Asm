@@ -44,6 +44,7 @@ export default function App() {
               ),
             }}
           />
+          
             <Tab.Screen
             name="Home"
             component={Home}
@@ -54,6 +55,7 @@ export default function App() {
                 </View>
               ),
             }}
+
           />
            <Tab.Screen
             name="Picture"
@@ -67,6 +69,7 @@ export default function App() {
             }}
           />
         </Tab.Navigator>
+        
       </NavigationContainer>
     <StatusBar style='light' />
     </SafeAreaView>

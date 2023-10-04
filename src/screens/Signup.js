@@ -15,16 +15,19 @@ import {
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
-import LottieView from "lottie-react-native";
 import { Container, H1, Background, Input, BUTTON,  } from "../components/style";
 import { Color } from "../../assets/colors/Colors";
+import { ScrollView } from "react-native-gesture-handler";
 
-export default function Picture({navigation}) {
+export default function Signup({navigation}) {
+    const onLogin = () => {
+        navigation.navigate("Picture");
+      };
+  const OnTop = useRef(new Animated.Value(0)).current;
+  const onRotate = useRef(new Animated.Value(0)).current;
   const [check,setCheck] = useState(true);
   const [hidden,setHideen] = useState(true);
-  const onSignup = () => {
-    navigation.navigate("REGISTER");
-  };
+
 
   return (
     <View className={"flex-1"}>
@@ -32,7 +35,7 @@ export default function Picture({navigation}) {
         <SafeAreaView className="flex-1">
           <View className="flex-1 items-center">
             <H1 title heavy className="pb-[3vh] mt-[5vh]">
-              LOGIN
+               REGISTER
             </H1>
             <View
               className={
@@ -45,12 +48,23 @@ export default function Picture({navigation}) {
             mt-[6vh] 
             "
               >
-                Welcome Back
+               CREATE ACCOUNT
               </Text>
               <Text className="my-[5px] text-[#335] font-bold">
-                Login to your account
+              Account information
               </Text>
-              <Container className="mt-[20px]">
+              <Container className="mt-[20px] flex-1 ju">
+                <ScrollView className="h-[80%] flex-[0.7]">
+                <Input
+                  title={"Full Name"}
+                  placeholder={"Nguyen Van A"}
+                ></Input>
+              {/* Phone numbwe  */}
+              <Input
+                  title={"Phone Number"}
+                  placeholder={"03777xxxx"}
+                ></Input>
+              {/* User Name */}
                 <Input
                   title={"User Name"}
                   placeholder={"....@fpt.edu.vn"}
@@ -61,47 +75,26 @@ export default function Picture({navigation}) {
                  onPress={() => setHideen(!hidden)} 
                  />
                 </Input>
-                <View className = "flex-row items-center justify-between mt-5">
-                <View className="justify-start items-center flex-row mt-[10px]">
-                  <Pressable className = "w-5 h-5 border-2 rounded-[50%] " style={check?{backgroundColor: 'white' }:{backgroundColor: 'blue' }}   onPress={() => {
-                       setCheck(!check)
-                  }} /> 
-                 <H1 small v_small className = "text-primary_black mx-[20px]">Remember me</H1>
-                </View>
-                <H1 small bold className = "text-primary_sky mx-[20px] ">Forgot Password ? </H1>
-                </View>
-                {/* GOOGLE & FACEBOOK */}
-               <View className="flex-row items-center justify-center mt-5">
-               <View className="w-[40%] border-b">
-                </View>
-                <Text className="px-3 font-bold">OR</Text>
-                <View className="w-[40%] border-b">
-                </View>
-               </View>
-               <View className="flex items-center flex-row justify-evenly mt-7 ">
-                <Image 
-                className = {'w-[40px] h-[40px]'}
-                source={require('../../assets/images/icon_fb.png')} />
-                        <Image 
-                className = {'w-[40px] h-[40px] object-contain'}
-                source={require('../../assets/images/icon_gmail.png')} />
-                        <Image 
-                className = {'w-[40px] h-[40px]'}
-                source={require('../../assets/images/icon_inta.png')} />
-               </View>
-                {/* LOGIN */}
-                <View className = {"mt-10"}>
+                {/* Reapeat pass word */}
+                <Input title={"Enter the password"} placeholder={"************"} isCheck = {hidden}  >
+                <Icon name="eye" size={30} className={"absolute top-0 right-0 "} style={{position:'absolute', right: 20,  top:'45%' }}
+                 onPress={() => setHideen(!hidden)} 
+                 />
+                </Input>
+                </ScrollView>
+                         {/* LOGIN */} 
+             <View className = {" flex-[0.15]"}>
                 <BUTTON>
                  <Text className= 'text-center leading-[50px] text-white font-bold' > 
-                  LOGIN
+                  New Account
                  </Text>
                  </BUTTON>
                  <H1 small  className="text-primary_black flex text-center mt-4">
-                  Don't have an acount ? 
-                  <H1 small heavy className="text-primary_sky"
-                  onPress={onSignup}
-                  >
-                      Signup
+                  Already have an account ? 
+                  <H1 small heavy className="text-primary_sky
+                   
+                  " onPress={onLogin}>
+                      Login
                   </H1>
                  </H1>
                 </View>

@@ -9,6 +9,12 @@ const windownWidth = Dimensions.get('window').width;
 const windownHeight = Dimensions.get('window').height;
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Picture from "./Picture";
+import Signup from "./Signup";
+import ForgotPass from "./ForgotPassword";
+import Restpassword from "./Restpassword";
+
+
+
 
 const Drawer = createDrawerNavigator();
 const LOGIN_1 = "LOGIN";
@@ -18,8 +24,13 @@ const REGISTER_1 = "REGISTER";
 export default function Home() {
   return (
 
-<Drawer.Navigator initialRouteName="Picture" screenOptions={{headerShown: false}}  >
+<Drawer.Navigator initialRouteName="Restpassword" screenOptions={{headerShown: false}} 
+backBehavior="hitory"
+ >
 <Drawer.Screen name="Picture" component={Picture} />
+<Drawer.Screen name="REGISTER" component={Signup} />
+<Drawer.Screen name="ForgotPass" component={ForgotPass} />
+<Drawer.Screen name="Restpassword" component={Restpassword} />
 </Drawer.Navigator>
 
 

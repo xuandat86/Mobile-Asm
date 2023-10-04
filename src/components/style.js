@@ -47,6 +47,10 @@ const Container = styled.View`
    display: flex;
 `;
 
+const IconImage = styled.View`
+   width: 40px;
+   height: 40px;
+`
 
 const Background = ({ children, url }) => {
   return (
@@ -58,37 +62,34 @@ const Background = ({ children, url }) => {
   );
 };
 
-const Input = ({ children, title, placeholder,isCheck }) => {
+const Input = ({ children, title, placeholder,isCheck = false }) => {
   return (
     <View className = "items-start  justify-start my-[1.5vh]  ">
     <Text className="font-medium mb-2">{title}</Text>
     <TextInput className="w-full rounded-2xl border-b-0  border-b-transparent relative  "  
     underlineColor="transparent" placeholder={placeholder} 
-    secureTextEntry = 'true'
+    secureTextEntry = {isCheck}
     />
     {children}
     </View>
   )
 }
 
-const BUTTON = ({ children, title }) => {
+const BUTTON = ({ children }) => {
   return (
-    <View className = "items-start  justify-start my-[1.5vh]  ">
-    <Text className="font-medium mb-2">{title}</Text>
-    <TextInput className="w-full rounded-2xl border-b-0  border-b-transparent relative  "  
-    underlineColor="transparent" placeholder={placeholder} 
-    secureTextEntry = 'true'
-    />
-    {children}
-    </View>
+    <TouchableOpacity className='w-[40%] h-[50px] bg-primary_sky rounded-xl m-auto '>
+     {children}
+   </TouchableOpacity>
   )
-
-
+}
+const BtnBackOf = ({onPress}) => {
+  return (
+    <TouchableOpacity className="w-[50px] h-[50px] bg-purple absolute top-[5vh] left-2  justify-center rounded-lg items-center" onPress={onPress} >
+    <Icon name="chevron-left" color={'white'} size={25} />
+   </TouchableOpacity>
+  )
 }
 
 
 
-
-
-
-export { H1, Container,Background ,Input};
+export { H1, Container,Background ,Input,BUTTON,BtnBackOf};
