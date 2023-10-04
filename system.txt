@@ -1,0 +1,4 @@
+Công nghệ sử dụng trong react native 
+{
+   add fire base adđ Node JS add Redux and thunk 
+}
