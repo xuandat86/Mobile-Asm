@@ -1,20 +1,23 @@
 import * as React from 'react';
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { NavigationContainer } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Home from "./src/screens/Home";
 import Onboarding1 from './src/screens/Obroandring';
 import Picture from './src/screens/Picture';
+import Restpassword from './src/screens/Restpassword';
+import Signup from './src/screens/Signup';
+import ForgotPass from './src/screens/ForgotPassword';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const Tab = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <GestureHandlerRootView className="flex-1">
       <NavigationContainer style={{ flex: 1 }}>
         <Tab.Navigator 
           screenOptions={ 
@@ -47,7 +50,7 @@ export default function App() {
           
             <Tab.Screen
             name="Home"
-            component={Home}
+            component={Picture}
             options={{
               tabBarIcon: ({ color }) => (
                 <View style={{  alignItems: 'center', justifyContent: 'center' }}>
@@ -57,9 +60,42 @@ export default function App() {
             }}
 
           />
-           <Tab.Screen
-            name="Picture"
-            component={Picture}
+             <Tab.Screen
+            name="User"
+            component={Home}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <View style={{  alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon name="home" size={30} color={color} />
+                </View>
+              ),
+            }}
+          />
+             <Tab.Screen
+            name="ForgotPass"
+            component={ForgotPass}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <View style={{  alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon name="home" size={30} color={color} />
+                </View>
+              ),
+            }}
+          />
+             <Tab.Screen
+            name="Restpassword"
+            component={Restpassword}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <View style={{  alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon name="home" size={30} color={color} />
+                </View>
+              ),
+            }}
+          />
+             <Tab.Screen
+            name="Signup"
+            component={Signup}
             options={{
               tabBarIcon: ({ color }) => (
                 <View style={{  alignItems: 'center', justifyContent: 'center' }}>
@@ -69,31 +105,12 @@ export default function App() {
             }}
           />
         </Tab.Navigator>
-        
+        <StatusBar style='light' />
       </NavigationContainer>
-    <StatusBar style='light' />
-    </SafeAreaView>
+      </GestureHandlerRootView>
+
   );
 }
 
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
 
-// yarn add --dev tailwindcss@3.3.2 (Fix lỗi CB react native)
-
-/*
-Xây dựng Slider => {}
-*/
-
-
-/*
-Red component là 1 khái niệm chính thống và nó dùnh để đặc tẩ 1 thành phần component được sử dụng trong ứng dụng và có màu đỏ 
-
-*/

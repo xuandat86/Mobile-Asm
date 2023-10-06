@@ -15,18 +15,19 @@ import {
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Container, H1, Background, Input, BUTTON,  } from "../components/style";
+import { Container, H1, Background, Input, BUTTON,  BtnBackOf } from "../components/style";
 import { Color } from "../../assets/colors/Colors";
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function Signup({navigation}) {
     const onLogin = () => {
-        navigation.navigate("Picture");
+        navigation.navigate("Home");
       };
-  const OnTop = useRef(new Animated.Value(0)).current;
-  const onRotate = useRef(new Animated.Value(0)).current;
   const [check,setCheck] = useState(true);
   const [hidden,setHideen] = useState(true);
+  const onBack = () => {
+    navigation.goBack();
+  };
 
 
   return (
@@ -102,6 +103,7 @@ export default function Signup({navigation}) {
             </View>
           </View>
         </SafeAreaView>
+        <BtnBackOf onPress={onBack}/>
       </Background>
     </View>
   );

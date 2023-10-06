@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Dimensions } from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
 import LottieView from "lottie-react-native";
-import DataOnboarding from "../data/data";
+import {DataOnboarding} from "../data/data";
 
 
 const { width } = Dimensions.get("window");

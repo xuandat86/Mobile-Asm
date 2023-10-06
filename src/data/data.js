@@ -19,19 +19,19 @@ const DataOnboarding = [
         describe: "Get started by adding new books to your library. You can manually enter book details or scan the barcode."
       },
       {
-        id: 1,
+        id: 4,
         img: require('../../assets/animations/screen4.json'),
         title: "Library Management",
         describe: "Easily sort, search, and filter your books. Organize them by title, author, or genre."
       },
       {
-        id: 1,
+        id: 5,
         img: require('../../assets/animations/screen5.json'),
         title: "Smart Recommendations",
         describe: "The app will suggest books based on your preferences. "
       },
       {
-        id: 1,
+        id: 6,
         img: require('../../assets/animations/screen6.json'),
         title: "Rate and Review",
         describe: "After reading a book, you can rate and write a review to share with the community."
@@ -40,8 +40,44 @@ const DataOnboarding = [
         id: 7,
         img: require('../../assets/animations/screen_end.json'),
         title: "Start now and enjoy the best book management experience!",
+            describe: ''
       },
   ];
+
+  const DataBoook = [
+    {
+      id: 1,
+      url: require('../../assets/images/imgBooks/image1.png'),
+      title: 'Đắc Nhân Tâm',
+      author: 'Jony width'
+    },
+    {
+      id: 2,
+      url: require('../../assets/images/imgBooks/image2.png'),
+      title: 'Tuổi trẻ hoang dại',
+      author: 'Jony width'
+    },
+    {
+      id: 3, 
+      url: require('../../assets/images/imgBooks/image3.png'),
+      title: 'Thật đó nhỉ',
+      author: 'Jony width'
+    },
+    {
+      id: 4, 
+      url: require('../../assets/images/imgBooks/image1.png'),
+      title: 'Another Book',
+      author: 'Another Author'
+    },
+    {
+      id: 5, 
+      url: require('../../assets/images/imgBooks/image1.png'),
+      title: 'Another Book',
+      author: 'Another Author'
+    }
+    
+  ];
   
-  export default DataOnboarding;
+  
+  export  {DataBoook,DataOnboarding} ;
   

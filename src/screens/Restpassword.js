@@ -19,15 +19,17 @@ import LottieView from "lottie-react-native";
 import { Container, H1, Background, Input, BUTTON, BtnBackOf } from "../components/style";
 import { Color } from "../../assets/colors/Colors";
 
+
 export default function Restpassword({ navigation }) {
   const [check, setCheck] = useState(true);
   const [hidden, setHideen] = useState(true);
-  const onSignup = () => {
-    navigation.navigate("REGISTER");
+   const onSignup = () => {
+    navigation.navigate("Home");
   };
   const onBack = () => {
     navigation.goBack();
   };
+
   return (
     <View className={"flex-1"}>
       <Background url={require("../../assets/images/bg_1.png")}>
@@ -70,7 +72,7 @@ export default function Restpassword({ navigation }) {
               />
             </Input>
             {/* Send */}
-            <BUTTON onPress={onBack}>
+            <BUTTON onPresss={onSignup}>
               <Text
                 className={
                   "text-white font-bold  text-center leading-[50px] text-[20px] "
@@ -81,8 +83,8 @@ export default function Restpassword({ navigation }) {
             </BUTTON>
           </View>
         </SafeAreaView>
-        <BtnBackOf/>
-      </Background>
+        <BtnBackOf onPress={onBack}/>
+      </Background> 
     </View>
   );
 }

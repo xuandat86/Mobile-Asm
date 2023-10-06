@@ -4,26 +4,22 @@ import {
   View,
   Text,
   Pressable,
-  Dimensions,
-  TouchableOpacity,
-  Animated,
-  Easing,
   Image,
-  ImageBackground,
-  StatusBar,
   SafeAreaView,
 } from "react-native";
-import { TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
-import LottieView from "lottie-react-native";
 import { Container, H1, Background, Input, BUTTON,  } from "../components/style";
-import { Color } from "../../assets/colors/Colors";
-
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 export default function Picture({navigation}) {
   const [check,setCheck] = useState(true);
   const [hidden,setHideen] = useState(true);
-  const onSignup = () => {
-    navigation.navigate("REGISTER");
+  const [name,setName] = useState('');
+  const [pass,setPass] = useState('');
+  const onSigin = () => {
+    navigation.navigate("Signup");
+  };
+  const onForgot = () => {
+    navigation.navigate("ForgotPass");
   };
 
   return (
@@ -54,21 +50,24 @@ export default function Picture({navigation}) {
                 <Input
                   title={"User Name"}
                   placeholder={"....@fpt.edu.vn"}
+                  onChangeText={setName}
                 ></Input>
                 {/* Pass word */}
-                <Input title={"Password"} placeholder={"Password"} isCheck = {hidden}  >
+                <Input title={"Password"} placeholder={"Password"} isCheck = {hidden} 
+                onChangeText={setPass}
+                 >
                 <Icon name="eye" size={30} className={"absolute top-0 right-0 "} style={{position:'absolute', right: 20,  top:'45%' }}
                  onPress={() => setHideen(!hidden)} 
                  />
                 </Input>
                 <View className = "flex-row items-center justify-between mt-5">
                 <View className="justify-start items-center flex-row mt-[10px]">
-                  <Pressable className = "w-5 h-5 border-2 rounded-[50%] " style={check?{backgroundColor: 'white' }:{backgroundColor: 'blue' }}   onPress={() => {
+                  <Pressable className = "w-5 h-5 border-2 rounded-[50vw] " style={  check?{backgroundColor: 'white' }:{backgroundColor: 'blue' }}   onPress={() => {
                        setCheck(!check)
                   }} /> 
                  <H1 small v_small className = "text-primary_black mx-[20px]">Remember me</H1>
                 </View>
-                <H1 small bold className = "text-primary_sky mx-[20px] ">Forgot Password ? </H1>
+                <H1 small bold className = "text-primary_sky mx-[20px] "   onPress={onForgot}>Forgot Password ? </H1>
                 </View>
                 {/* GOOGLE & FACEBOOK */}
                <View className="flex-row items-center justify-center mt-5">
@@ -91,7 +90,9 @@ export default function Picture({navigation}) {
                </View>
                 {/* LOGIN */}
                 <View className = {"mt-10"}>
-                <BUTTON>
+                <BUTTON onPresss={() => {
+                  (name.trim() == 'User' &&  pass.trim() == '12345678') ? navigation.navigate('User'):alert('ERROR')
+                }}> 
                  <Text className= 'text-center leading-[50px] text-white font-bold' > 
                   LOGIN
                  </Text>
@@ -99,7 +100,7 @@ export default function Picture({navigation}) {
                  <H1 small  className="text-primary_black flex text-center mt-4">
                   Don't have an acount ? 
                   <H1 small heavy className="text-primary_sky"
-                  onPress={onSignup}
+                  onPress={onSigin}
                   >
                       Signup
                   </H1>
