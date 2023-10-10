@@ -5,41 +5,40 @@ import {
   Text,
   Pressable,
   Dimensions,
-  TouchableOpacity,
   Animated,
-  Easing,
   Image,
-  ImageBackground,
-  StatusBar,
-  SafeAreaView,
 } from "react-native";
-import { TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Container, H1, Background, Input, BUTTON , Slider} from "../components/style";
+import { Container, H1, Background, Input, BUTTON, Slider, BtnBackRight, BtnBackOf } from "../components/style";
 import { Color } from "../../assets/colors/Colors";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
+import DetailBooks from "../components/DetailBooks";
+import { DataOrder } from "../data/data";
+import { useNavigation } from "@react-navigation/native";
 
 
-export default function User({ navigation }) {
-  const onLogin = () => {
-    navigation.navigate("Picture");
-  };
-  const OnTop = useRef(new Animated.Value(0)).current;
-  const onRotate = useRef(new Animated.Value(0)).current;
-  const [check, setCheck] = useState(true);
-  const [hidden, setHideen] = useState(true);
-  const [notCurrent, setCurrent] = useState(0);
+
+export default function User() {
+  const navigation = useNavigation();
   const { width, height } = Dimensions.get("window");
-  const ItemSeparator = () => {
-    return <View style={{ height: 10 }} />; // Đặt 
-  };
-  const booksDT =[1,1,1];
-  const SlideRef = useRef(null);
-  const [index1, setIndex] = useState('');
-  
- 
-
-
+  const ItemUser = (props) => (
+    <Pressable className="bg-white shadow-metal p-4 rounded-xl flex-row my-2 " style={{
+      elevation: 4,
+      shadowColor: 'rgba(0, 0, 0, 0.2)',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 1,
+      shadowRadius: 4,
+    }}
+    onPress={() => navigation.navigate('HistoryOrder',props.item)}
+    >
+      <Text className="font-bold text-[20px] w-3/6">Mã Đơn: <Text className="font-medium text-midnight">{props.id}</Text></Text>
+      <View className='flex-row justify-around w-3/6'>
+        <Icon name="search" size={25} />
+        <Icon name="edit" size={25} color={'green'} />
+        <Icon name="trash" size={25} color={'red'} />
+      </View>
+    </Pressable>
+  )
   return (
     <View className={"flex-1"}>
       <View
@@ -65,75 +64,29 @@ export default function User({ navigation }) {
           Nguyễn Văn Dũng
         </H1>
       </View>
-      {/* Carousel list view  */}
-     <View className=" w-full h-[30%] flex-col items-center justify-start">
-     <FlatList
-     horizontal
-     showsHorizontalScrollIndicator  = {false}
-     alwaysBounceHorizontal = {false}
-      className = {'flex-1 w-[90%] m-auto '}
-       data={booksDT} 
-       ref = {SlideRef}
-       ItemSeparatorComponent={()=> {
-        return(
-          <View className = "w-[20px]" />
-        )
-       }}
-      renderItem={() => {
-        return (
-         <View>
-           <Slider title={'Kinh Doanh'} content={'Nghĩ Giàu Làm Giàu Napoleon Hill'} img={require("../../assets/images/imgBooks/image1.png")}/>
+      {/* Danh sách phiếu mượn  */}
+      <View style={{ width: width * 0.9 }} className="mx-auto mt-6 ">
+        <BUTTON style1={{width: width*0.8}}>
+          <Text className="text-white text-center leading-[50px] font-bold">
+            Danh sách phiếu mượn
+          </Text>
+        </BUTTON>
+        {/* ListView */}
+         <FlatList 
+          data={DataOrder}
+          renderItem={({item}) => (<ItemUser id = {item.id} item = {item}/>) }
+         />
+        {/* ListView */}
+      </View>
 
-         
-         </View>
-        )
-       
-      }}
-      keyExtractor={(item) => item}
-      onScroll={(e) => {
-        let tranlate = e.nativeEvent.contentOffset.x;
-        let index  = ( (tranlate/width).toFixed(0));
-        setIndex(index);
-      }}
-        >
-        </FlatList>
-        <View className = 'items-center justify-center flex-row '> 
-             {
-              booksDT.map((item,index) => {
-                return(
-                  <View className = " mx-3"
-                  style = {{
-                   backgroundColor:index == index1 ? 'blue' : 'gray',
-                   width: index == index1 ? 25  :10 ,
-                   height: 10,
-                   borderRadius: 10
-                   }}
-                  >
-                  </View>
-                )
-              })
-             }
-           </View>
-     </View>
-     {/* <BUTTON onPresss={() => {
-        setIndex(() => {
-          let newIndex = index1 < booksDT? parseInt(index1 + 1) : parseInt(0);
-          SlideRef.current.scrollToIndex({
-           animated: true,
-            index: parseInt(newIndex)
-    });
-    return newIndex;
-        })
-}}>
+      <BtnBackRight isClass={{ position: 'absolute', right: 20, top: '5%' }} />
 
-</BUTTON> */}
-
-       
+      <BtnBackOf />
     </View>
-    
+
   );
 }
 
 
 
-{/* <Slider title={'Kinh Doanh'} content={'Nghĩ Giàu Làm Giàu Napoleon Hill'} img={require("../../assets/images/imgBooks/image1.png")}/> */}
+{/* <Slider title={'Kinh Doanh'} content={'Nghĩ Giàu Làm Giàu Napoleon Hill'} img={require("../../assets/images/imgBooks/image1.png")}/> */ }

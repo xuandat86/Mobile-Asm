@@ -91,7 +91,7 @@ export default function Picture({navigation}) {
                 {/* LOGIN */}
                 <View className = {"mt-10"}>
                 <BUTTON onPresss={() => {
-                  (name.trim() == 'User' &&  pass.trim() == '12345678') ? navigation.navigate('User'):alert('ERROR')
+                  (name.trim() == 'User' &&  pass.trim() == '12345678') ? navigation.navigate('User'):navigation.navigate('HomeAdmin')
                 }}> 
                  <Text className= 'text-center leading-[50px] text-white font-bold' > 
                   LOGIN

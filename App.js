@@ -12,13 +12,18 @@ import Signup from './src/screens/Signup';
 import ForgotPass from './src/screens/ForgotPassword';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import DetailOrder from './src/screens/Admin/DetailOrder';
+import NavAdmin from './src/navigation/NavAdmin';
+import { HistoryOrder } from './src/screens/Admin/Orders/HistoryOrder';
+
+
 
 const Tab = createNativeStackNavigator();
 
 export default function App() {
   return (
     <GestureHandlerRootView className="flex-1">
-      <NavigationContainer style={{ flex: 1 }}>
+      <NavigationContainer style={{ flex: 1 }}  >
         <Tab.Navigator 
           screenOptions={ 
             {
@@ -32,11 +37,35 @@ export default function App() {
                 borderRadius: 15,
                 flexDirection:"column",
                 alignItems: 'center',
-                justifyContent: 'center', // Để căn giữa chiều dọc
+                justifyContent: 'center', 
               },
             }
           }
+          initialRouteName='Onboarding'
         >
+
+<Tab.Screen
+            name="NavAdmin"
+            component={NavAdmin}
+            options={{
+              headerShown: false,
+              headerBackVisible: true,
+              
+
+              
+            }}
+          />
+                      <Tab.Screen
+            name="DetailOrder"
+            component={DetailOrder}
+            options={{
+              headerShown: true,
+              headerBackVisible: true,
+              title: 'Chi Tiết Đơn Hàng',
+            
+              
+            }}
+          />
           <Tab.Screen
             name="Onboarding"
             component={Onboarding1}
@@ -58,8 +87,7 @@ export default function App() {
                 </View>
               ),
             }}
-
-          />
+            />
              <Tab.Screen
             name="User"
             component={Home}
@@ -103,7 +131,32 @@ export default function App() {
                 </View>
               ),
             }}
-          />
+
+          /> 
+          {/* ADMIN */}
+          <Tab.Screen
+            name="HomeAdmin"
+            component={NavAdmin}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <View style={{  alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon name="home" size={30} color={color} />
+                </View>
+              ),
+            }}
+          /> 
+         {/* History Order */}
+         <Tab.Screen
+            name="HistoryOrder"
+            component={HistoryOrder}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <View style={{  alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon name="home" size={30} color={color} />
+                </View>
+              ),
+            }}
+          /> 
         </Tab.Navigator>
         <StatusBar style='light' />
       </NavigationContainer>

@@ -54,7 +54,7 @@ export default function Signup({navigation}) {
               <Text className="my-[5px] text-[#335] font-bold">
               Account information
               </Text>
-              <Container className="mt-[20px] flex-1 ju">
+              <Container className="mt-[20px] flex-1 ">
                 <ScrollView className="h-[80%] flex-[0.7]">
                 <Input
                   title={"Full Name"}
