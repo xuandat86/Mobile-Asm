@@ -6,7 +6,7 @@ const services_ac = require("../services/services_ac");
 const getATC = async (req, res) => {
      try {
       const newAC = await services_ac.getListAcount1();
-      res.status(200).send(newAC);
+      res.status(200).json(newAC);
      } catch (error) {
       res.status(404).send("ERROR 404");
      }22
@@ -23,13 +23,12 @@ const getATC = async (req, res) => {
     }
   }
   const findAcount = async (req, res) => {
-    const { email } = req.params;
-    console.log(email);
-    if (email) {
+    const { id } = req.params;
+    if (id) {
       try {
-        const account = await services_ac.findAcount1(email);
+        const account = await services_ac.findAcount1(id);
         if (account) {
-          res.status(200).send("Succses");
+          res.status(200).send(account);
         } else {
           res.status(404).send("Not found");
         }
@@ -91,10 +90,10 @@ const getATC = async (req, res) => {
     }
   }
   const findAccount_Email = async (req,res) => {
-    const {email} =  req.params;
-    if(email)
+    const {id} =  req.params;
+    if(id)
    {
-    const account = await services_ac.findAcountEmail(email);
+    const account = await services_ac.findAcountEmail(id);
     console.log(account);
     try {
       if (account) {

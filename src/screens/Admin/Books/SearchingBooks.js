@@ -5,14 +5,23 @@ import {
   Text,
   Pressable,
   Dimensions,
-  Image
+  Image,
+  Alert
 
 } from "react-native";
 import { BUTTON, BtnBackOf, H1, Input , ViewHeader} from "../../../components/style";
 import { ScrollView } from "react-native-gesture-handler";
+const {getDetailBooks} = require("../../../api/books");
 export default function SearchingBooks({ navigation }) {
   const { width, height } = Dimensions.get("window");
-  
+
+  const [id,setid] = useState('');
+  const validate = async () => {
+       if(id.trim() == '')alert("Vui lòng nhập ID");
+       const item = await getDetailBooks(id);
+       Alert.alert("Thông tin sách",`\nTên sách: ${item.title}  \n\n Tác giả: ${item.author} \n\n Giá sách: ${item.price} vnd ` )
+
+  }
   return (
    <View className = "flex-1">
    <ViewHeader content={{width:'100%'}}/>
@@ -30,13 +39,13 @@ export default function SearchingBooks({ navigation }) {
       </BUTTON>
       <View className="w-5/6 h-4/5 mx-auto">
        <ScrollView className = "w-full h-full">
-       <Input title={'Mã Sách'} isStyle={{color: 'black'}}/>
+       <Input title={'Mã Sách'} isStyle={{color: 'black'}} onChangeText={setid}/>
            {/* Thông tin trả về */}
 
            {/* Thông tin trả về */}
        </ScrollView>
        <BUTTON  style1={{width:width*0.5, marginBottom: 5}} > 
-      <Text className = "text-center leading-[50px] text-white font-bold text-[18px]" >Thêm</Text>
+      <Text className = "text-center leading-[50px] text-white font-bold text-[18px]" onPress={validate} >Thêm</Text>
       </BUTTON>
       </View>
     

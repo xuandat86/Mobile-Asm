@@ -1,7 +1,7 @@
 // Sequelize 
 const {Sequelize} = require("sequelize");
 const {HOST,USER,PASSWORD,DB,dialech} = require("../configs/db.configs");
-const  { tb_user,Category,tb_Books,Order } = require("./md.book"); 
+const  { tb_user,Category,tb_Books,Order } = require("./md.book");  
 
 
 // Connect database 
@@ -45,6 +45,7 @@ tb_Books1.belongsToMany(user, {
 // BOOK
 tb_Books1.hasMany(tb_Order, { foreignKey: 'id_boooks' });
 tb_Order.belongsTo(tb_Books1, { foreignKey: 'id_boooks' });
+
 
 
 module.exports = {checkConnect, sequelize,user,tb_Books1,Category1,tb_Order}

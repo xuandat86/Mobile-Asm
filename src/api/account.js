@@ -1,9 +1,10 @@
 // Asios 
 import axios from 'axios';
+const {port} = require("../backend/configs/db.configs");
 const getAcounts = async () => {
     const res = await axios({
       method: "GET",
-      url: `http://localhost:3008/Accounts`,
+      url: `http://localhost:${port}/Accounts`,
     });
     return res.data;
   }; 
@@ -11,7 +12,7 @@ const getAcounts = async () => {
 const createAcount = async (account) => {
     const res = await axios({
         method: "POST",
-        url: `http://localhost:3008/Accounts`,
+        url: `http://localhost:${port}/Accounts`,
         data: account,
     });
     return res.data;
@@ -22,7 +23,7 @@ const getLogin = async (name,pass) => {
      try {
       const res = await axios({
         method: "GET",
-        url: `http://localhost:3008/Accounts/${name}/${pass}`,
+        url: `http://localhost:${port}/Accounts/${name}/${pass}`,
       });
       return res.data;
      } catch (error) {
@@ -30,6 +31,20 @@ const getLogin = async (name,pass) => {
      }
   }; 
 
-module.exports = {getAcounts,createAcount,getLogin};
+
+const getAcount = async (id) => {
+  try {
+   const res = await axios({
+     method: "GET",
+     url: `http://localhost:${port}/Accounts/${id}`,
+   });
+   return res.data;
+  } catch (error) {
+   return false;
+  }
+}; 
+
+
+module.exports = {getAcounts,createAcount,getLogin,getAcount};
 
 

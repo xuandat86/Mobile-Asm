@@ -94,6 +94,11 @@ const Order =  (sequelize) => (
     sequelize.define(
         "Order",
         {
+            id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true, 
+                autoIncrement: true, 
+              },
             id_user: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -112,7 +117,6 @@ const Order =  (sequelize) => (
             }
         },
         {
-
             timestamps: true
         }
     )

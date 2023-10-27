@@ -4,8 +4,8 @@ module.exports = {
     USER: "root",
     PASSWORD: "Da24102003",
     DB: "appBook",
-    dialech: "mysql"
+    dialech: "mysql",
+    port: 3008
 }
 
 
-// Create datafination 

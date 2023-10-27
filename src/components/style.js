@@ -218,7 +218,7 @@ const ViewHeader = ({content}) => {
 //
 const DetailUser = (props) => {
   return (
-    <Pressable className = "bg-white shadow-metal p-4 rounded-xl flex-row  " style = {{ elevation :4  , 
+    <Pressable className = "bg-white shadow-metal p-4 rounded-xl flex-row  my- " style = {{ elevation :4  , 
       shadowColor: 'rgba(0, 0, 0, 0.2)',
   shadowOffset: { width: 0, height: 2 },
   shadowOpacity: 1,
