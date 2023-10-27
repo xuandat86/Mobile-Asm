@@ -6,21 +6,70 @@ import {
   Pressable,
   Image,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Container, H1, Background, Input, BUTTON,  } from "../components/style";
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {Empty, Regex,passLength } from "../validation/form_validation";
+import  {getLogin} from "../../src/api/account";
+
 export default function Picture({navigation}) {
   const [check,setCheck] = useState(true);
   const [hidden,setHideen] = useState(true);
   const [name,setName] = useState('');
   const [pass,setPass] = useState('');
+
   const onSigin = () => {
     navigation.navigate("Signup");
   };
   const onForgot = () => {
     navigation.navigate("ForgotPass");
+  }; 
+  const onUser = () => {
+    navigation.navigate("User");
   };
+  const onAdmin = () => {
+    navigation.navigate("NavAdmin");
+  };
+  const element = [
+   {error:"username",value: name, validation: [{
+    validate: Empty,
+    errorMessage: "Không được để trống name"
+   }]},
+   {error:"password",value: pass, validation: [
+    {
+      validate: Empty,
+      errorMessage: "Không được để trống password"
+     },
+    //  {
+    //   validate: passLength,
+    //   errorMessage: "Password từ 8 kí tự trở lên"
+    //  }
+     ]}
+  ]
+  const validate = async () => {
+    const error = [];
+    for (const item of element) {
+      for (const validate of item.validation) {
+        if(!validate.validate(item.value)){
+          error.push(validate.errorMessage);
+        }
+      }
+    }
+   if(error.length > 0){
+      const notificalArror = error.join('\n');
+    return  alert(notificalArror)
+   }
+   const Acounts = await getLogin(name,pass);
+   !Acounts ? Alert.alert("ERROR","Mật khẩu hoặc tài khoản không đúng!",[{
+    text: "OK",
+    onPress: () => {
+      setName('');
+      setPass('')
+    }
+   }]) : (Acounts === "Admin" ? onAdmin() : onUser());
+  }
+
 
   return (
     <View className={"flex-1"}>
@@ -51,10 +100,12 @@ export default function Picture({navigation}) {
                   title={"User Name"}
                   placeholder={"....@fpt.edu.vn"}
                   onChangeText={setName}
+                  changeText={name}
                 ></Input>
                 {/* Pass word */}
                 <Input title={"Password"} placeholder={"Password"} isCheck = {hidden} 
                 onChangeText={setPass}
+                changeText={pass}
                  >
                 <Icon name="eye" size={30} className={"absolute top-0 right-0 "} style={{position:'absolute', right: 20,  top:'45%' }}
                  onPress={() => setHideen(!hidden)} 
@@ -91,9 +142,9 @@ export default function Picture({navigation}) {
                 {/* LOGIN */}
                 <View className = {"mt-10"}>
                 <BUTTON onPresss={() => {
-                  (name.trim() == 'User' &&  pass.trim() == '12345678') ? navigation.navigate('User'):navigation.navigate('HomeAdmin')
+                  validate()
                 }}> 
-                 <Text className= 'text-center leading-[50px] text-white font-bold' > 
+                 <Text className= 'text-center leading-[50px] text-white font-bold s' > 
                   LOGIN
                  </Text>
                  </BUTTON>

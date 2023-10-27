@@ -134,7 +134,7 @@ export default function App() {
 
           /> 
           {/* ADMIN */}
-          <Tab.Screen
+          <Tab.Screen 
             name="HomeAdmin"
             component={NavAdmin}
             options={{

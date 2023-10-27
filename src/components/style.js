@@ -64,7 +64,7 @@ const Background = ({ children, url }) => {
   );
 };
 
-const Input = ({ children, title, placeholder,isCheck = false ,isStyle,onChangeText }) => {
+const Input = ({ children, title, placeholder,isCheck = false ,isStyle,onChangeText,changeText }) => {
   return (
     <View className = "items-start  justify-start my-[1.5vh]  ">
     <Text className="font-medium mb-2"
@@ -74,6 +74,7 @@ const Input = ({ children, title, placeholder,isCheck = false ,isStyle,onChangeT
     underlineColor="transparent" placeholder={placeholder} 
     secureTextEntry = {isCheck}
     onChangeText={onChangeText}
+    value={changeText}
     />
     {children}
     </View>

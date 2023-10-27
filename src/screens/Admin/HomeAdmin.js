@@ -1,16 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  View,
-  Text,
-  Pressable,
   Dimensions,
-  TouchableOpacity,
-  Animated,
-  Easing,
-  Image,
-  ImageBackground,
-  StatusBar,
-  SafeAreaView,
+
 } from "react-native";
 import { CreateDate, H1 } from "../../components/style";
 import Icon from "react-native-vector-icons/FontAwesome";

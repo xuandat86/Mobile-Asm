@@ -1,34 +1,104 @@
 // App list => {}
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   View,
   Text,
-  Pressable,
-  Dimensions,
-  TouchableOpacity,
-  Animated,
-  Easing,
-  Image,
-  ImageBackground,
-  StatusBar,
   SafeAreaView,
+  Alert,
 } from "react-native";
-import { TextInput } from "react-native-paper";
+
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Container, H1, Background, Input, BUTTON,  BtnBackOf } from "../components/style";
-import { Color } from "../../assets/colors/Colors";
 import { ScrollView } from "react-native-gesture-handler";
+import {Empty, Regex,passLength } from "../validation/form_validation";
+const {createAcount} = require("../api/account"); 
+
 
 export default function Signup({navigation}) {
     const onLogin = () => {
         navigation.navigate("Home");
       };
+      
   const [check,setCheck] = useState(true);
   const [hidden,setHideen] = useState(true);
+  const [fullName,setFullName] = useState('');
+  const [phoneNumber,setUserName] = useState('');
+  const [phone,setPhone] = useState('');
+  const [password,setPassword] = useState('');
+  const [reapeatpassword,setReapeatPassword] = useState('');
+  const ListIP = [
+    setFullName,setUserName,setPhone,setPassword,setReapeatPassword
+  ]
+  const resetAllFields = () => {
+    ListIP.forEach(setStateFunction => setStateFunction(''));
+  };
+  const account = {
+    fullname: fullName,
+    Phone_user: phone,
+    Username_user: phoneNumber,
+    Password_user: password,
+    hierarchy: "User"
+  };
+
+  const Create = async () => {
+   return await createAcount(account);
+  }
   const onBack = () => {
     navigation.goBack();
   };
 
+  const element = [
+    {value: fullName, validation: [{
+     validate: Empty,
+     errorMessage: "Không được để trống full name"
+    }]},
+    {value: phone, validation: [{
+      validate: Empty,
+      errorMessage: "Không được để trống sđt"
+     }]},
+    {value: phoneNumber, validation: [{
+      validate: Empty,
+      errorMessage: "Không được để trống UserName"
+     }]},
+     {error:"password",value: password, validation: [
+     {
+       validate: Empty,
+       errorMessage: "Không được để trống password"
+      },
+      {
+       validate: passLength,
+       errorMessage: "Password từ 8 kí tự trở lên"
+      }
+      ]},
+      {error:"password",value: reapeatpassword, validation: [
+        {
+          validate: Empty,
+          errorMessage: "Không được để trống password"
+         },
+         {
+          validate: passLength,
+          errorMessage: "Password từ 8 kí tự trở lên"
+         }
+         ]},
+      
+   ]
+   const validate = async () => {
+     const error = [];
+     for (const item of element) {
+       for (const validate of item.validation) {
+         if(!validate.validate(item.value)){
+           error.push(validate.errorMessage);
+         }
+       }
+     }
+    if(error.length > 0){
+       const notificalArror = error.join('\n');    
+     return  Alert.alert("Notification", notificalArror )
+    }
+    const newUser = await Create();
+    if(newUser)resetAllFields();
+     
+   }  
 
   return (
     <View className={"flex-1"}>
@@ -59,25 +129,35 @@ export default function Signup({navigation}) {
                 <Input
                   title={"Full Name"}
                   placeholder={"Nguyen Van A"}
+                  onChangeText={setFullName}
+                  changeText={fullName}
                 ></Input>
               {/* Phone numbwe  */}
               <Input
                   title={"Phone Number"}
                   placeholder={"03777xxxx"}
+                  onChangeText={setPhone}
+                  changeText={phone}
                 ></Input>
               {/* User Name */}
                 <Input
                   title={"User Name"}
                   placeholder={"....@fpt.edu.vn"}
+                  onChangeText={setUserName}
+                  changeText={phoneNumber}
                 ></Input>
                 {/* Pass word */}
-                <Input title={"Password"} placeholder={"Password"} isCheck = {hidden}  >
+                <Input title={"Password"} placeholder={"Password"} isCheck = {hidden}  onChangeText={setPassword} 
+                changeText={password}
+                 >
                 <Icon name="eye" size={30} className={"absolute top-0 right-0 "} style={{position:'absolute', right: 20,  top:'45%' }}
                  onPress={() => setHideen(!hidden)} 
                  />
                 </Input>
                 {/* Reapeat pass word */}
-                <Input title={"Enter the password"} placeholder={"************"} isCheck = {hidden}  >
+                <Input title={"Enter the password"} placeholder={"************"} isCheck = {hidden} onChangeText={setReapeatPassword} 
+                changeText={reapeatpassword}
+                 >
                 <Icon name="eye" size={30} className={"absolute top-0 right-0 "} style={{position:'absolute', right: 20,  top:'45%' }}
                  onPress={() => setHideen(!hidden)} 
                  />
@@ -85,16 +165,14 @@ export default function Signup({navigation}) {
                 </ScrollView>
                          {/* LOGIN */} 
              <View className = {" flex-[0.15]"}>
-                <BUTTON>
+                <BUTTON onPresss={validate}>
                  <Text className= 'text-center leading-[50px] text-white font-bold' > 
                   New Account
                  </Text>
                  </BUTTON>
                  <H1 small  className="text-primary_black flex text-center mt-4">
                   Already have an account ? 
-                  <H1 small heavy className="text-primary_sky
-                   
-                  " onPress={onLogin}>
+                  <H1 small heavy className="text-primary_sky" onPress={onLogin}>
                       Login
                   </H1>
                  </H1>
